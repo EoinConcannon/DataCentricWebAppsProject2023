@@ -44,7 +44,14 @@ app.get('/products/delete/:pid', (req, res) => {
 })
 
 app.get('/managers', (req, res) => {
-    res.render("managers")
+    mongoDAO.displayManagers()
+        .then((data) => {
+            res.render("managers", {"managers": data})
+        })
+        .catch((error) => {
+            console.log("NOT OK")
+            console.log(error)
+        })
 })
 
 app.get('/managers/add', (req, res) => {

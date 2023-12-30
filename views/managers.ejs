@@ -1,8 +1,25 @@
 <body>
     <h1>Managers (MongoDB)</h1>
-    <p>
-        <a href="http://localhost:3000/managers/add">Add Manager (MongoDB)</a>
-        <br>
-        <a href="http://localhost:3000/">Home</a>
-    </p>
+    <p><a href="http://localhost:3000/managers/add">Add Manager (MongoDB)</a></p>
+    <table>
+        <tr>
+            <th>Manager ID</th>
+            <th>Name</th>
+            <th>Salary</th>
+        </tr>
+        <% managers.forEach((currentElement)=> { %>
+            <tr>
+                <td>
+                    <%= currentElement._id %>
+                </td>
+                <td>
+                    <%= currentElement.name %>
+                </td>
+                <td>
+                    <%= currentElement.salary %>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
+    <p><a href="http://localhost:3000/">Home</a></p>
 </body>
