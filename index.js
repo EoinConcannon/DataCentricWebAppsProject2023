@@ -2,10 +2,12 @@ const express = require('express')
 let ejs = require('ejs');
 var mySQLDAO = require('./mySQLDAO')
 var mongoDAO = require('./mongoDAO')
+var bodyParser = require('body-parser')
 
 
 const app = express()
 app.set('view engine', 'ejs')
+app.use(bodyParser.urlencoded({extended: false}))
 
 const port = 3000
 
@@ -47,6 +49,7 @@ app.get('/managers', (req, res) => {
     mongoDAO.displayManagers()
         .then((data) => {
             res.render("managers", {"managers": data})
+            res.send(data)
         })
         .catch((error) => {
             console.log("NOT OK")
@@ -58,7 +61,12 @@ app.get('/managers/add', (req, res) => {
     res.render("managersADD")
 })
 
-//POST managers/add
+app.post('/managers/add', (req, res) => {
+    console.log(req.body._id)
+    console.log(req.body.name)
+    console.log(req.body.salary)
+    res.redirect('/managers')
+})
 
 app.listen(port, () => {
     console.log(`Connected to port ${port}`)
