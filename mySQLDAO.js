@@ -28,4 +28,17 @@ function displayStores() {
     })
 }
 
-module.exports = { displayStores }
+function displayProducts() {
+    return new Promise((resolve, reject) => {
+        //LOOK FOR A BETTER QUERY
+        pool.query('select distinct p.pid, p.productdesc, ps.sid, s.location, ps.price from product p inner join product_store ps inner join store s order by p.pid;')
+            .then((data) => {
+                resolve(data)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    })
+}
+
+module.exports = { displayStores, displayProducts }

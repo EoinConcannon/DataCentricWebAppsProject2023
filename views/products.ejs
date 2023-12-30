@@ -1,8 +1,37 @@
 <body>
     <h1>Products</h1>
+    <table>
+        <tr>
+            <th>Product ID</th>
+            <th>Description</th>
+            <th>Store ID</th>
+            <th>Location</th>
+            <th>Price</th>
+        </tr>
+        <% products.forEach((currentElement)=> { %>
+            <tr>
+                <td>
+                    <%= currentElement.pid %>
+                </td>
+                <td>
+                    <%= currentElement.productdesc %>
+                </td>
+                <td>
+                    <%= currentElement.sid %>
+                </td>
+                <td>
+                    <%= currentElement.location %>
+                </td>
+                <td>
+                    <%= currentElement.price %>
+                </td>
+                <td>
+                    <a href="http://localhost:3000/products/delete/:pid">Delete </a>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
     <p>
-        <a href="http://localhost:3000/products/delete/:pid">Delete Products</a>
-        <br>
         <a href="http://localhost:3000/">Home</a>
     </p>
 </body>

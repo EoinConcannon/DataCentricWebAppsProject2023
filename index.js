@@ -17,9 +17,6 @@ app.get('/stores', (req, res) => {
     mySQLDAO.displayStores()
         .then((data) => {
             res.render("stores", {"stores": data})
-
-            //res.render("students", {"students": data})
-
         })
         .catch((error) => {
             res.send(error)
@@ -33,7 +30,13 @@ app.get('/stores/edit/:sid', (req, res) => {
 //POST stores/edit/:sid
 
 app.get('/products', (req, res) => {
-    res.render("products")
+    mySQLDAO.displayProducts()
+        .then((data) => {
+            res.render("products", {"products": data})
+        })
+        .catch((error) => {
+            res.send(error)
+        })
 })
 
 app.get('/products/delete/:pid', (req, res) => {

@@ -3,28 +3,30 @@
     <p>
         <a href="http://localhost:3000/stores">Add Store</a>
     </p>
-    <tr>
-        <th>SID</th>
-        <th>Location</th>
-        <th>Manager ID</th>
-        <th>Action</th>
-    </tr>
-    <% stores.forEach((currentElement)=> { %>
+    <table>
         <tr>
-            <td>
-                <%= currentElement.sid %>
-            </td>
-            <td>
-                <%= currentElement.location %>
-            </td>
-            <td>
-                <%= currentElement.mgrid %>
-            </td>
-            <td>
-                <a href="http://localhost:3000/stores/edit/:sid">Update</a>
-            </td>
+            <th>SID</th>
+            <th>Location</th>
+            <th>Manager ID</th>
+            <th>Action</th>
         </tr>
-        <% }) %>
+        <% stores.forEach((currentElement)=> { %>
+            <tr>
+                <td>
+                    <%= currentElement.sid %>
+                </td>
+                <td>
+                    <%= currentElement.location %>
+                </td>
+                <td>
+                    <%= currentElement.mgrid %>
+                </td>
+                <td>
+                    <a href="http://localhost:3000/stores/edit/:sid">Update</a>
+                </td>
+            </tr>
+            <% }) %>
+    </table>
     <p>
         <a href="http://localhost:3000/">Home</a>
     </p>
