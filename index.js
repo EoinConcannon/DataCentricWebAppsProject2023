@@ -1,5 +1,8 @@
 const express = require('express')
 let ejs = require('ejs');
+var mySQLDAO = require('./mySQLDAO')
+var mongoDAO = require('./mongoDAO')
+
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -11,7 +14,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/stores', (req, res) => {
-    res.render("stores")
+    mySQLDAO.displayStores()
+        .then((data) => {
+            res.render("stores", {"stores": data})
+
+            //res.render("students", {"students": data})
+
+        })
+        .catch((error) => {
+            res.send(error)
+        })
 })
 
 app.get('/stores/edit/:sid', (req, res) => {
