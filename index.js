@@ -11,17 +11,17 @@ app.get('/', (req, res) => {
 })
 
 app.get('/stores', (req, res) => {
-    res.send('<h1>Stores</h1>')
+    res.render("stores")
 })
 
 app.get('/stores/edit/:sid', (req, res) => {
-    res.send('<h1>Edit Stores</h1>')
+    res.render("storesEDIT")
 })
 
 //POST stores/edit/:sid
 
 app.get('/products', (req, res) => {
-    res.send('<h1>Products</h1>')
+    res.render("products")
 })
 
 app.get('/products/delete/:pid', (req, res) => {
@@ -29,11 +29,11 @@ app.get('/products/delete/:pid', (req, res) => {
 })
 
 app.get('/managers', (req, res) => {
-    res.send('<h1>Managers</h1>')
+    res.render("managers")
 })
 
 app.get('/managers/add', (req, res) => {
-    res.send('<h1>Add Managers</h1>')
+    res.render("managersADD")
 })
 
 //POST managers/add
