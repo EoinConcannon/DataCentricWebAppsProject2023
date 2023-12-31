@@ -25,4 +25,16 @@ var displayManagers = function () {
     })
 }
 
-module.exports = { displayManagers } 
+var addManagers = function (managers) {
+    return new Promise((resolve, reject) => {
+        coll.insertOne(managers)
+            .then((documents) => {
+                resolve(documents)
+            })
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+
+module.exports = { displayManagers, addManagers } 

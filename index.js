@@ -7,7 +7,7 @@ var bodyParser = require('body-parser')
 
 const app = express()
 app.set('view engine', 'ejs')
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 const port = 3000
 
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 app.get('/stores', (req, res) => {
     mySQLDAO.displayStores()
         .then((data) => {
-            res.render("stores", {"stores": data})
+            res.render("stores", { "stores": data })
         })
         .catch((error) => {
             res.send(error)
@@ -29,12 +29,14 @@ app.get('/stores/edit/:sid', (req, res) => {
     res.render("storesEDIT")
 })
 
-//POST stores/edit/:sid
+app.post('/stores/edit/:sid', (req, res) => {
+    res.redirect('/stores')
+})
 
 app.get('/products', (req, res) => {
     mySQLDAO.displayProducts()
         .then((data) => {
-            res.render("products", {"products": data})
+            res.render("products", { "products": data })
         })
         .catch((error) => {
             res.send(error)
@@ -48,7 +50,7 @@ app.get('/products/delete/:pid', (req, res) => {
 app.get('/managers', (req, res) => {
     mongoDAO.displayManagers()
         .then((data) => {
-            res.render("managers", {"managers": data})
+            res.render("managers", { "managers": data })
             res.send(data)
         })
         .catch((error) => {
@@ -62,9 +64,22 @@ app.get('/managers/add', (req, res) => {
 })
 
 app.post('/managers/add', (req, res) => {
-    console.log(req.body._id)
-    console.log(req.body.name)
-    console.log(req.body.salary)
+    let idADD = req.body._id
+    let nameADD = req.body.name
+    let salaryADD = req.body.salary
+
+    mongoDAO.addManagers({
+        _id: idADD,
+        name: nameADD,
+        salary: salaryADD
+    })
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((error) => {
+            console.log("NOT OK")
+            console.log(error)
+        })
     res.redirect('/managers')
 })
 
