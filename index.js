@@ -44,7 +44,18 @@ app.get('/products', (req, res) => {
 })
 
 app.get('/products/delete/:pid', (req, res) => {
-    res.send('<h1>Delete Products</h1>')
+    let pidDELETE = [req.body.pid]
+
+    console.log(pidDELETE);
+
+    mySQLDAO.deleteProducts(pidDELETE)
+        .then((data) => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    res.redirect('/products')
 })
 
 app.get('/managers', (req, res) => {

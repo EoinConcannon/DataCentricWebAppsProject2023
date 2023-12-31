@@ -41,4 +41,16 @@ function displayProducts() {
     })
 }
 
-module.exports = { displayStores, displayProducts }
+function deleteProducts(pid) {
+    return new Promise((resolve, reject) => {
+        pool.query(`DELETE FROM product WHERE condition pid = ${pid};`)
+            .then((data) => {
+                resolve(data)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    })
+}
+
+module.exports = { displayStores, displayProducts, deleteProducts }

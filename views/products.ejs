@@ -26,7 +26,7 @@
                     <%= currentElement.price %>
                 </td>
                 <td>
-                    <a href="http://localhost:3000/products/delete/:pid">Delete </a>
+                    <a href="http://localhost:3000/products/delete/<%= currentElement.pid %>">Delete <%= currentElement.productdesc %></a>
                 </td>
             </tr>
             <% }) %>
