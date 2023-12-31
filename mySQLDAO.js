@@ -43,7 +43,7 @@ function displayProducts() {
 
 function deleteProducts(pid) {
     return new Promise((resolve, reject) => {
-        pool.query(`DELETE FROM product WHERE condition pid = ${pid};`)
+        pool.query(`DELETE FROM product WHERE pid = "${pid}"`)
             .then((data) => {
                 resolve(data)
             })
