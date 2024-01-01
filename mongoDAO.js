@@ -12,6 +12,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017')
         console.log(error.message)
     })
 
+//displays the list of data from managers collection in MongoDB
 var displayManagers = function () {
     return new Promise((resolve, reject) => {
         var cursor = coll.find()
@@ -25,6 +26,7 @@ var displayManagers = function () {
     })
 }
 
+//adds new data to the managers collection
 var addManagers = function (managers) {
     return new Promise((resolve, reject) => {
         coll.insertOne(managers)
@@ -37,4 +39,4 @@ var addManagers = function (managers) {
     })
 }
 
-module.exports = { displayManagers, addManagers } 
+module.exports = { displayManagers, addManagers } //these functions can be used in index.js

@@ -15,7 +15,7 @@ pmysql.createPool({
         console.log("pool error:" + e)
     })
 
-
+//displays the list of stores
 function displayStores() {
     return new Promise((resolve, reject) => {
         pool.query('SELECT * FROM store')
@@ -28,6 +28,7 @@ function displayStores() {
     })
 }
 
+//displays product ID, product description, store ID, location, price
 function displayProducts() {
     return new Promise((resolve, reject) => {
         //select p.pid, p.productdesc, ps.sid, s.location, ps.price from product p left join product_store ps ON p.pid = ps.pid left join store s ON ps.sid = s.sid order by p.pid;
@@ -41,6 +42,7 @@ function displayProducts() {
     })
 }
 
+//when "delete (productdesc)" is clicked
 function deleteProducts(pid) {
     return new Promise((resolve, reject) => {
         pool.query(`DELETE FROM product WHERE pid = "${pid}"`)
@@ -53,6 +55,7 @@ function deleteProducts(pid) {
     })
 }
 
+//update store data
 function editStores(sidVAR, locationVAR, mgridVAR) {
     return new Promise((resolve, reject) => {
         pool.query(`UPDATE store SET location = "${locationVAR}", mgrid = "${mgridVAR}" where sid = "${sidVAR}"`)
@@ -89,4 +92,4 @@ function addProducts(pidVAR, productdescVAR, supplierVAR) {
     })
 }
 
-module.exports = { displayStores, displayProducts, deleteProducts, editStores, addStores, addProducts }
+module.exports = { displayStores, displayProducts, deleteProducts, editStores, addStores, addProducts } //these functions can be used in index.js
