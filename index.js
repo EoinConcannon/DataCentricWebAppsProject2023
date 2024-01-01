@@ -27,19 +27,21 @@ app.get('/stores', (req, res) => {
 
 app.get('/stores/edit/:sid', (req, res) => {
     var currentStore = {
-        values: [req.params.sid,
-        req.params.location,
-        req.params.mgrid]
+        values: [req.body.sid,
+        req.body.location,
+        req.body.mgrid]
     }
-
     res.render("storesEDIT", { "storesEDIT": currentStore })
 })
 
 app.post('/stores/edit/:sid', (req, res) => {
-    mySQLDAO.editStores()
+    sidVAR = req.body.sid
+    locationVAR = req.body.location 
+    mgridVAR = req.body.mgrid
+    
+    mySQLDAO.editStores(sidVAR, locationVAR, mgridVAR)
         .then((data) => {
             console.log(data)
-
         })
         .catch(error => {
             console.log(error)

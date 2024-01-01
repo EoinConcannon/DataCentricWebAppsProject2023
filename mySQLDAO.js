@@ -53,9 +53,9 @@ function deleteProducts(pid) {
     })
 }
 
-function editStores(editStoreID) {
+function editStores(sidVAR, locationVAR, mgridVAR) {
     return new Promise((resolve, reject) => {
-        pool.query(`UPDATE store set location = "new location", mgrid = "new manager" where sid = "${editStoreID}"`)
+        pool.query(`UPDATE store SET location = "${locationVAR}", mgrid = "${mgridVAR}" where sid = "${sidVAR}"`)
             .then((data) => {
                 resolve(data)
             })
