@@ -39,7 +39,7 @@ app.post('/stores/edit/:sid', (req, res) => {
     mySQLDAO.editStores()
         .then((data) => {
             console.log(data)
-            
+
         })
         .catch(error => {
             console.log(error)
@@ -104,6 +104,26 @@ app.post('/managers/add', (req, res) => {
             console.log(error)
         })
     res.redirect('/managers')
+})
+
+app.get('/stores/add', (req, res) => {
+    res.render("storesADD")
+})
+
+app.post('/stores/add', (req, res) => {
+    sidVAR = req.body.sid
+    locationVAR = req.body.location 
+    mgridVAR = req.body.mgrid
+
+    mySQLDAO.addStores(sidVAR, locationVAR, mgridVAR)
+        .then((data) => {
+
+            res.send(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    res.redirect('/stores')
 })
 
 app.listen(port, () => {

@@ -65,4 +65,16 @@ function editStores(editStoreID) {
     })
 }
 
-module.exports = { displayStores, displayProducts, deleteProducts, editStores }
+function addStores(sidVAR, locationVAR, mgridVAR) {
+    return new Promise((resolve, reject) => {
+        pool.query(`INSERT INTO store (sid, location, mgrid) VALUES ("${sidVAR}", "${locationVAR}", "${mgridVAR}");`)
+            .then((data) => {
+                resolve(data)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    })
+}
+
+module.exports = { displayStores, displayProducts, deleteProducts, editStores, addStores }
