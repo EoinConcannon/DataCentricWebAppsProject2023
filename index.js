@@ -26,15 +26,30 @@ app.get('/stores', (req, res) => {
 })
 
 app.get('/stores/edit/:sid', (req, res) => {
-    res.render("storesEDIT")
+    var currentStore = {
+        values: [req.params.sid,
+        req.params.location,
+        req.params.mgrid]
+    }
+
+    res.render("storesEDIT", { "storesEDIT": currentStore })
 })
 
 app.post('/stores/edit/:sid', (req, res) => {
+    mySQLDAO.editStores()
+        .then((data) => {
+            console.log(data)
+            
+        })
+        .catch(error => {
+            console.log(error)
+        })
     res.redirect('/stores')
 })
 
 app.get('/products', (req, res) => {
-    mySQLDAO.displayProducts()
+    var editStoreID = req.params.sid
+    mySQLDAO.displayProducts(editStoreID)
         .then((data) => {
             res.render("products", { "products": data })
         })
@@ -44,7 +59,7 @@ app.get('/products', (req, res) => {
 })
 
 app.get('/products/delete/:pid', (req, res) => {
-    var pidDELETE= req.params.pid
+    var pidDELETE = req.params.pid
 
     mySQLDAO.deleteProducts(pidDELETE)
         .then((data) => {
@@ -64,7 +79,6 @@ app.get('/managers', (req, res) => {
             res.send(data)
         })
         .catch((error) => {
-            console.log("NOT OK")
             console.log(error)
         })
 })
@@ -87,7 +101,6 @@ app.post('/managers/add', (req, res) => {
             res.send(data)
         })
         .catch((error) => {
-            console.log("NOT OK")
             console.log(error)
         })
     res.redirect('/managers')

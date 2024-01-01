@@ -53,4 +53,16 @@ function deleteProducts(pid) {
     })
 }
 
-module.exports = { displayStores, displayProducts, deleteProducts }
+function editStores(editStoreID) {
+    return new Promise((resolve, reject) => {
+        pool.query(`UPDATE store set location = "new location", mgrid = "new manager" where sid = "${editStoreID}"`)
+            .then((data) => {
+                resolve(data)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    })
+}
+
+module.exports = { displayStores, displayProducts, deleteProducts, editStores }
