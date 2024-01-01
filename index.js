@@ -60,6 +60,25 @@ app.get('/products', (req, res) => {
         })
 })
 
+app.get('/products/add', (req, res) => {
+    res.render("productsADD")
+})
+
+app.post('/products/add', (req, res) => {
+    pidVAR = req.body.pid
+    productdescVAR = req.body.productdesc 
+    supplierVAR = req.body.supplier
+
+    mySQLDAO.addProducts(pidVAR, productdescVAR, supplierVAR)
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    res.redirect('/products')
+})
+
 app.get('/products/delete/:pid', (req, res) => {
     var pidDELETE = req.params.pid
 
